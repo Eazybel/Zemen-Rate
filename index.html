@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-900 font-sans">
+<div id="spinner" class="absolute hidden right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2">
+    <div class="p-4 bg-gradient-to-tr animate-spin from-green-500 to-blue-500 via-purple-500 rounded-full">
+        <div class="bg-white rounded-full">
+            <div class="w-24 h-24 rounded-full"></div>
+        </div>
+    </div>
+</div>
+    <main class="max-w-4xl mx-auto my-12 p-8 bg-white rounded-3xl shadow-2xl space-y-10">
+
+      <!-- Header -->
+      <header class="text-center">
+        <h1 class="text-4xl font-bold text-indigo-700 drop-shadow-md mb-2">🌐 Currency Converter</h1>
+        <p class="text-gray-600 text-base">Select your currencies and see live conversion values and global exchange rates.</p>
+      </header>
+
+      <!-- Dropdowns Section -->
+      <section class="flex flex-col sm:flex-row items-center gap-4">
+        <!-- Input for Amount -->
+        <div class="flex-1 w-full">
+          <label for="amount" class="block text-sm font-semibold text-gray-700 mb-1">Amount</label>
+          <input id="amount" type="number" placeholder="Enter amount" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white" />
+        </div>
+
+        <!-- From Currency Dropdown -->
+        <div class="flex-1 w-full">
+          <label for="fromCurrency" class="block text-sm font-semibold text-gray-700 mb-1">From Currency</label>
+          <select id="fromCurrency" name="fromCurrency" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+            <!-- Sorted by global influence -->
+            <option value="usd">United States (United States Dollar)</option>
+            <option value="aud">Australia (Australian Dollar)</option>
+            <option value="brl">Brazil (Brazilian Real)</option>
+            <option value="cad">Canada (Canadian Dollar)</option>
+            <option value="chf">Switzerland (Swiss Franc)</option>
+            <option value="clp">Chile (Chilean Peso)</option>
+            <option value="cny">China (Chinese Yuan)</option>
+            <option value="dkk">Denmark (Danish Krone)</option>
+            <option value="etb">Ethiopia (Ethiopian Birr)</option>
+            <option value="eur">Eurozone (Euro)</option>
+            <option value="gbp">United Kingdom (British Pound Sterling)</option>
+            <option value="hkd">Hong Kong (Hong Kong Dollar)</option>
+            <option value="inr">India (Indian Rupee)</option>
+            <option value="jpy">Japan (Japanese Yen)</option>
+            <option value="kes">Kenya (Kenyan Shilling)</option>
+            <option value="krw">South Korea (South Korean Won)</option>
+            <option value="mxn">Mexico (Mexican Peso)</option>
+            <option value="myr">Malaysia (Malaysian Ringgit)</option>
+            <option value="ngn">Nigeria (Nigerian Naira)</option>
+            <option value="nok">Norway (Norwegian Krone)</option>
+            <option value="nzd">New Zealand (New Zealand Dollar)</option>
+            <option value="php">Philippines (Philippine Peso)</option>
+            <option value="pln">Poland (Polish Zloty)</option>
+            <option value="rub">Russia (Russian Ruble)</option>
+            <option value="sar">Saudi Arabia (Saudi Riyal)</option>
+            <option value="sek">Sweden (Swedish Krona)</option>
+            <option value="sgd">Singapore (Singapore Dollar)</option>
+            <option value="thb">Thailand (Thai Baht)</option>
+            <option value="try">Turkey (Turkish Lira)</option>
+            <option value="aed">United Arab Emirates (United Arab Emirates Dirham)</option>
+            <option value="zar">South Africa (South African Rand)</option>
+          </select>
+        </div>
+
+        <!-- To Currency Dropdown -->
+        <div class="flex-1 w-full">
+          <label for="toCurrency" class="block text-sm font-semibold text-gray-700 mb-1">To Currency</label>
+          <select id="toCurrency" name="toCurrency" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+            <!-- Same list as above -->
+            <option value="etb">Ethiopia (Ethiopian Birr)</option>
+            <option value="aud">Australia (Australian Dollar)</option>
+            <option value="brl">Brazil (Brazilian Real)</option>
+            <option value="cad">Canada (Canadian Dollar)</option>
+            <option value="chf">Switzerland (Swiss Franc)</option>
+            <option value="clp">Chile (Chilean Peso)</option>
+            <option value="cny">China (Chinese Yuan)</option>
+            <option value="dkk">Denmark (Danish Krone)</option>
+            <option value="eur">Eurozone (Euro)</option>
+            <option value="gbp">United Kingdom (British Pound Sterling)</option>
+            <option value="hkd">Hong Kong (Hong Kong Dollar)</option>
+            <option value="inr">India (Indian Rupee)</option>
+            <option value="jpy">Japan (Japanese Yen)</option>
+            <option value="kes">Kenya (Kenyan Shilling)</option>
+            <option value="krw">South Korea (South Korean Won)</option>
+            <option value="mxn">Mexico (Mexican Peso)</option>
+            <option value="myr">Malaysia (Malaysian Ringgit)</option>
+            <option value="ngn">Nigeria (Nigerian Naira)</option>
+            <option value="nok">Norway (Norwegian Krone)</option>
+            <option value="nzd">New Zealand (New Zealand Dollar)</option>
+            <option value="php">Philippines (Philippine Peso)</option>
+            <option value="pln">Poland (Polish Zloty)</option>
+            <option value="rub">Russia (Russian Ruble)</option>
+            <option value="sar">Saudi Arabia (Saudi Riyal)</option>
+            <option value="sek">Sweden (Swedish Krona)</option>
+            <option value="sgd">Singapore (Singapore Dollar)</option>
+            <option value="thb">Thailand (Thai Baht)</option>
+            <option value="try">Turkey (Turkish Lira)</option>
+            <option value="aed">United Arab Emirates (United Arab Emirates Dirham)</option>
+            <option value="usd">United States (United States Dollar)</option>
+            <option value="zar">South Africa (South African Rand)</option>
+          </select>
+        </div>
+
+        <!-- Date Picker (hidden by default) -->
+        <div class="flex-1 w-full " id="dateInputWrapper">
+          <label for="dateInput" class="block text-sm font-semibold text-gray-700 mb-1">Select Date</label>
+          <input id="dateInput" type="date" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white" />
+        </div>
+      </section>
+
+      <!-- Convert Button -->
+      <div class="text-center mt-6">
+        <button id="convertButton" class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          Convert
+        </button>
+      </div>
+
+      <!-- Fetched Conversion Display -->
+      <section id="display" class="hidden">
+        <div class="p-6 mt-4 text-center rounded-xl bg-indigo-100 text-indigo-800 font-semibold text-xl shadow-md">
+          <p><span id="much"></span><span id="start"></span> = <span id="convertedValue">&nbsp;</span><span id="end">~</span></p>
+        </div>
+      </section>
+
+      <!-- Major Exchange Rate Pairs -->
+      <section class="mt-10">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Major Currency Pairs (Today)</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-indigo-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 USD → GBP</span>
+            <span id="usdgbp" class="font-semibold text-indigo-700"></span>
+          </div>
+          <div class="bg-green-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 GBP → JPY</span>
+            <span id="gbpjpy" class="font-semibold text-green-700"></span>
+          </div>
+          <div class="bg-yellow-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 USD → CNY</span>
+            <span id="usdcny" class="font-semibold text-yellow-700"></span>
+          </div>
+          <div class="bg-pink-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 USD → EUR</span>
+            <span id="usdeur" class="font-semibold text-pink-700"></span>
+          </div>
+          <div class="bg-blue-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 EUR → GBP</span>
+            <span id="eurgbp" class="font-semibold text-blue-700"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETB Focused Exchange Rates -->
+      <section class="mt-10">
+        <h2 class="text-xl font-bold text-gray-800 mb-4"> Ethiopian Birr Exchange Rate (Today)</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-indigo-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 US-DOLLAR → BIRR</span>
+            <span id="usdetb" class="font-semibold text-indigo-700"></span>
+          </div>
+          <div class="bg-green-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 EURO → BIRR</span>
+            <span id="euretb" class="font-semibold text-green-700"></span>
+          </div>
+          <div class="bg-yellow-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 POUND → BIRR</span>
+            <span id="gbpetb" class="font-semibold text-yellow-700"></span>
+          </div>
+          <div class="bg-pink-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 RIYAL → BIRR</span>
+            <span id="saretb" class="font-semibold text-pink-700"></span>
+          </div>
+          <div class="bg-pink-50 rounded-lg shadow p-4 flex justify-between">
+            <span class="font-medium">1 DIRHAM → BIRR</span>
+            <span id="aedetb" class="font-semibold text-pink-700"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="text-center text-sm text-gray-400 mt-10">
+        © 2025 Currency Converter App. Built with <a class="text-blue-700 font-bold" href="http://syntax.pro.et">SyntaxDesigns</a>
+      </footer>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
