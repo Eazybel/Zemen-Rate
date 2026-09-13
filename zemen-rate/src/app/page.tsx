@@ -1,16 +1,13 @@
 "use client"
 import Image from "next/image";
-import {useActionState, useState,useRef
-} from "react"
+import {useActionState,useRef,useEffect} from "react"
 import FormData from "@/app/api/formData"
 export default function Home() {
   const formRef=useRef<HTMLFormElement>(null)
   const [state,formAction,pending]=useActionState(FormData,undefined)
-  const [data,setData]=useState<object|undefined>({})
-const clickHandler=()=>{
-  setData(state)
-  console.log(data)
-}
+useEffect(()=>{
+console.log(state)
+},[state])
 
 
   return (
@@ -25,7 +22,7 @@ const clickHandler=()=>{
           <option value="nonr" disabled>Select currency To</option>
           <option value="GBP">GBP</option>
         </select>
-        <button onClick={clickHandler} type="submit">Convert</button>
+        <button type="submit">Convert</button>
       </form>
     </div>
   );
